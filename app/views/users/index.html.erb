@@ -1,0 +1,10 @@
+<h1>Usuarios</h1>
+<h2>Usuarios Registrados: <%= @users.count %></h2>
+
+<% @users.each do |user|%>
+  <h3><%= user.nombre%></h3>
+  <span>email: <%= user.correo %> </span>
+  <%= link_to user_path(user.id) do%>
+  <span>Ver detalles</span>
+  <%end%>
+<% end %>

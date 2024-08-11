@@ -13,3 +13,28 @@
  *= require_tree .
  *= require_self
  */
+:root {
+  --verde: #a3a948;
+  --amarillo: #edb92e;
+  --naranja: #f85931;
+  --rojo: #ce1836;
+  --azul: #009989;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+.topBar {
+  height: 80px;
+  display: flex;
+  background-color: var(--amarillo);
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.logo {
+  max-height: 70px;
+}

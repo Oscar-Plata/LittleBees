@@ -10,5 +10,18 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "dashboard#index"
+  
+  #USUARIO
+  get '/users', to: "users#index"
+  get '/users/:id', to: "users#show", as: :user
+
+  #PRODUCTO
+  get '/products', to: "products#index"
+  get '/products/:id', to: "products#show", as: :product
+
+  #VENTA
+  get '/sales', to: "sales#index"
+  get '/checkout', to: "sales#create"
+  get '/sales/:id', to: "sales#show", as: :sale
 end

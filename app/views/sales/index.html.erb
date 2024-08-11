@@ -1,0 +1,12 @@
+<h1>Ventas</h1>
+<h2>Ventas Registradas: <%= @sales.count %></h2>
+
+<% @sales.each do |sale|%>
+  <h3><%= sale.id%></h3>
+  <span>Fecha: <%= sale.fecha %> </span>
+  <span>Hora: <%= sale.hora %> </span>
+  <span>Monto total: $ <%= sale.total %> </span>
+  <%= link_to sales_path(sale.id) do%>
+  <span>Ver detalles</span>
+  <%end%>
+<% end %>
