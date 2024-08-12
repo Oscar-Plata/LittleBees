@@ -17,11 +17,21 @@ Rails.application.routes.draw do
   get '/users/:id', to: "users#show", as: :user
 
   #PRODUCTO
-  get '/products', to: "products#index"
-  get '/products/:id', to: "products#show", as: :product
+  patch '/products/:id', to: "products#update"
+  post '/products', to: 'products#create'
+  get '/products', to: "products#index", as: :productos
+  get '/products/new', to: "products#new", as: :new_producto
+  get '/products/:id', to: "products#show", as: :producto
+  get '/products/:id/edit',to: "products#edit", as: :edit_producto
+  
+
 
   #VENTA
   get '/sales', to: "sales#index"
   get '/checkout', to: "sales#create"
   get '/sales/:id', to: "sales#show", as: :sale
+
+  #SESION
+  get '/login', to: "session#login"
+  get '/register', to: "session#register"
 end
