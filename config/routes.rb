@@ -13,10 +13,16 @@ Rails.application.routes.draw do
   root "dashboard#index"
   
   #USUARIO
-  get '/users', to: "users#index"
-  get '/users/:id', to: "users#show", as: :user
+  delete '/users/:id', to: "users#destroy"
+  patch '/users/:id', to: "users#update"
+  post '/users', to: "users#create"
+  get '/users', to: "users#index", as: :usuarios
+  get '/users/new', to: "users#new", as: :new_usuario
+  get '/users/:id', to: "users#show", as: :usuario
+  get '/users/:id/edit', to: "users#edit", as: :edit_usuario
 
   #PRODUCTO
+  delete '/products/:id', to: 'products#destroy'
   patch '/products/:id', to: "products#update"
   post '/products', to: 'products#create'
   get '/products', to: "products#index", as: :productos

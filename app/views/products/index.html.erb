@@ -3,12 +3,11 @@
   <h2>Productos Disponibles: <%= @productos.count %></h2>
   <%= link_to 'Añadir Producto', new_producto_path %>
 </div>
+<br/>
+<%= form_with url: productos_path, method: :get do |form| %>
+  <%= form.text_field :busqueda, placeholder: "Nombre del producto", value: params[:busqueda] %>
+  <%= form.submit "Buscar", disable_with: 'Submiting...' %>
+<% end %>
 <br />
 
-<div>
-  <% @productos.each do |producto|%>
-    <h3><%= producto.nombre %></h3>
-    <span>$ <%= producto.precio %> </span>
-    <%= link_to 'Ver detalles', producto_path(producto.id) %>
-  <% end %>
-</div>
+<%= render partial: 'producto', collection: @productos %>

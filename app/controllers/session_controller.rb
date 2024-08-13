@@ -4,6 +4,6 @@ class SessionController < ApplicationController
   end
 
   def register
-    
+    @usuario=Usuario.new
   end
 end

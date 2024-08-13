@@ -1,0 +1,4 @@
+<h3><b><%= producto.id %> - </b><%= producto.nombre %></h3>
+<span>$ <%= producto.precio %> </span>
+<%= link_to 'Ver detalles', producto_path(producto.id) %>
+<%= image_tag producto.foto, width: 100 if producto.foto.attached? %>

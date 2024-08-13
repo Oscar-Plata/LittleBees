@@ -1,4 +1,11 @@
+<%= link_to 'Volver', productos_path, class: 'btn btn-primary' %>
+<div>
+  <%= image_tag @producto.foto, width: 100 if @producto.foto.attached? %>
+</div>
 <h1><%= @producto.nombre %></h1>
+<p>ID: <%= @producto.id %></p>
 <p><%= @producto.descripcion %></p>
-<span>$ <%= @producto.precio %></span>
-<%= link_to 'Editar Producto', edit_producto_path(@producto) %>
+<b>$ <%= @producto.precio %></b>
+<br/>
+<%= link_to 'Editar Producto', edit_producto_path(@producto) , class: 'btn btn-primary' %>
+<%= link_to 'Eliminar producto', producto_path(@producto), data: {turbo: true, turbo_method: :delete, turbo_confirm: '¿Estás seguro?'} %>

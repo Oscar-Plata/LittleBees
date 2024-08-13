@@ -1,10 +1,12 @@
+<div>
 <h1>Usuarios</h1>
-<h2>Usuarios Registrados: <%= @users.count %></h2>
+<h2>Usuarios Registrados: <%= @usuarios.count %></h2>
+<%= link_to 'Registrar Usuario', new_usuario_path %>
+</div>
+<br />
 
-<% @users.each do |user|%>
-  <h3><%= user.nombre%></h3>
-  <span>email: <%= user.correo %> </span>
-  <%= link_to user_path(user.id) do%>
-  <span>Ver detalles</span>
-  <%end%>
+<% @usuarios.each do |usuario|%>
+  <h3><%= usuario.nombre%></h3>
+  <span>email: <%= usuario.correo %> </span>
+  <%= link_to 'Ver detalles', usuario_path(usuario.id) %>
 <% end %>

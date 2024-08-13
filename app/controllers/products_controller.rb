@@ -1,6 +1,17 @@
 class ProductsController < ApplicationController
   def index
-    @productos = Producto.all
+    @productos = Producto.with_attached_foto.order(nombre: :asc)
+    if params[:busqueda].present?
+      busqueda= params[:busqueda]
+      # @productos = @productos.where("MATCH(nombre, descripcion) AGAINST(?) OR id= ?", busqueda,busqueda.to_i)
+  
+      busqueda= params[:busqueda]
+      if busqueda.to_i.to_s == busqueda
+        @productos = @productos.where("id = ?", busqueda.to_i)
+      else
+        @productos = @productos.where("nombre LIKE ? OR descripcion LIKE ?", "%#{busqueda}%", "%#{busqueda}%")
+      end
+    end
   end
 
   def show
@@ -8,18 +19,17 @@ class ProductsController < ApplicationController
   end
 
   def new
-      @product = Producto.new
+      @producto = Producto.new
   end
   
-
   def edit
-    @product = Producto.find(params[:id])
+    producto
   end
 
   def create
-    @product = Producto.new(product_params)
-    if @product.save
-      redirect_to products_path, notice: "El producto se creó correctamente"
+    @producto = Producto.new(product_params)
+    if @producto.save
+      redirect_to productos_path, notice: "El producto se creó correctamente"
     else
       flash[:alert] = "Error al crear el producto"
       render :new, status: :unprocessable_entity
@@ -28,7 +38,7 @@ class ProductsController < ApplicationController
 
   def update
     if producto.update(product_params)
-      redirect_to products_path, notice: 'El producto se actualizo correctamente'
+      redirect_to productos_path, notice: 'El producto se actualizó correctamente'
     else
       flash[:alert] = "Error al editar el producto"
       render :edit, status: :unprocessable_entity
@@ -36,21 +46,18 @@ class ProductsController < ApplicationController
   
   end
   
-  def  destroy
+  def destroy
     if producto.destroy
-      redirect_to products_path, notice: 'El producto se elimino correctamente'
+      redirect_to productos_path, notice: 'El producto se eliminó correctamente', status: :see_other
     else
       flash[:alert] = "Error al eliminar el producto"
       render :edit, status: :unprocessable_entity
     end
   end
-  
-  
-  
 
   private 
     def product_params
-      params.require(:producto).permit(:nombre,:descripcion,:precio)
+      params.require(:producto).permit(:nombre,:descripcion,:precio,:foto)
     end
     
     def producto
