@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_13_073604) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_13_202743) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_13_073604) do
     t.float "precio", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["nombre"], name: "index_productos_on_nombre", unique: true
   end
 
   create_table "usuarios", force: :cascade do |t|
@@ -53,6 +54,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_13_073604) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["correo"], name: "index_usuarios_on_correo", unique: true
   end
 
   create_table "venta", force: :cascade do |t|

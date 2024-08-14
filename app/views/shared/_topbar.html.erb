@@ -2,11 +2,12 @@
   <%= link_to "/" do%>
     <%= image_tag 'logoLB.png', class: 'logo' %>
   <%end%>
-  <h3>Bienvenido</h3>
+  <h3>Bienvenido <%= Current.user&.nombre %></h3>
   <div>
-    <%= link_to "/login" do%>
-      <span>Login</span>
-    <%end%>
+    <% if Current.user %>
+      <%= link_to "Cerrar Sesión", logout_session_path, data: {turbo: true, turbo_method: :delete} %>
+    <% else %>
+      <%= link_to "Iniciar Sesión", login_session_path, method: :get %>
+    <% end %>
   </div>
-  <%# <button>Cerrar Sesion</button> %>
 </header>

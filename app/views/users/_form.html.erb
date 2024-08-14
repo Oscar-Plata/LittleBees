@@ -2,17 +2,17 @@
 <%= form_with model: @usuario do |form| %>
   <div>
     <%= form.label :nombre %>
-    <%= form.text_field :nombre %>
+    <%= form.text_field :nombre, required: true %>
   </div>
 
   <div>
     <%= form.label :correo %>
-    <%= form.email_field :correo %>
+    <%= form.email_field :correo, required: true %>
   </div>
 
   <div>
-    <%= form.label "Contraseña: " %>
-    <%= form.password_field :password%>
+    <%= form.label :password %>
+    <%= form.password_field :password, required: true%>
   </div>
   <div>
     <%= form.submit %>
