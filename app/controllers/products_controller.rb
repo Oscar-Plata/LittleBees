@@ -47,11 +47,27 @@ class ProductsController < ApplicationController
   end
   
   def destroy
-    if producto.destroy
+    if producto.productosventa.exists?
+      flash[:alert] = "No se puede eliminar el producto porque está asociado a una venta"
+      redirect_to productos_path, status: :see_other
+    elsif producto.destroy
       redirect_to productos_path, notice: 'El producto se eliminó correctamente', status: :see_other
     else
       flash[:alert] = "Error al eliminar el producto"
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def search
+    query = params[:query]
+    pp query
+    @productos = Producto.all.where('nombre LIKE ?', "%#{query}%")
+
+    pp @productos
+
+    respond_to do |format|
+      format.html { render partial: 'products/resultados', locals: { productos: @productos } }
+      # format.json { render json: @productos }
     end
   end
 

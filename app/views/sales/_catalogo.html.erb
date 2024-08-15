@@ -1,0 +1,14 @@
+
+  <% productos.each do |producto| %>
+    <li>
+      <%= producto.id %> ~ <%= producto.nombre %>
+      <!-- Botón para agregar el producto -->
+      <%= form_with(url: agregar_item_path, method: :post) do |f| %>
+        <%# hidden_field_tag :sale_id, @sale.present? ? @sale.id : nil %>
+        <%= f.hidden_field :id, value: producto.id %>
+        <%= f.number_field :cantidad, value: 0, min: 1 %>
+        <%= f.submit "Agregar a Venta" %>
+      <% end %>
+    </li>
+  <% end %>
+

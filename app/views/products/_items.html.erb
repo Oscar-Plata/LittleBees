@@ -1,0 +1,22 @@
+<ul>
+  <% @sale.productosventa.each do |pv| %>
+  <% producto = pv.producto%>
+    <li>
+      <%= producto.nombre %> - <%= number_to_currency(producto.precio) %> -  <%= pv.cantidad*producto.precio %>
+      <%= form_with(url: agregar_item_path) do |f| %>
+        <%# hidden_field_tag :sale_id, @sale.id %>
+        <%= f.hidden_field :id, value: producto.id %>
+        <%= f.number_field :cantidad, value: pv.cantidad, min: 0 %>
+        <%= f.submit "Actualizar cantidad" %>
+      <% end%>
+
+      <%= form_with(url: quitar_item_path,method: :delete) do |f| %>
+        <%= f.hidden_field :id, value: pv.id %>
+        <%= f.hidden_field :producto_id, value: producto.id %>
+        <%= hidden_field_tag :venta_id, @sale.id %>
+        <%= f.submit "X" %>
+      <% end%>
+    </li>
+
+  <% end %>
+</ul>

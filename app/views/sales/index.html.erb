@@ -3,10 +3,11 @@
 
 <% @sales.each do |sale|%>
   <h3><%= sale.id%></h3>
+  <%  aux = sale.id%>
+  <%= aux %>
   <span>Fecha: <%= sale.fecha %> </span>
   <span>Hora: <%= sale.hora %> </span>
   <span>Monto total: $ <%= sale.total %> </span>
-  <%= link_to sales_path(sale.id) do%>
-  <span>Ver detalles</span>
-  <%end%>
+<%= link_to 'Generar PDF', ventaPDF_path(sale), data: { turbo: false } %>
+  <%= link_to 'Ver detalles', venta_path(aux) %>
 <% end %>

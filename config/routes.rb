@@ -3,11 +3,11 @@ Rails.application.routes.draw do
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
-  # get "up" => "rails/health#show", as: :rails_health_check
+  get "up" => "rails/health#show", as: :rails_health_check
 
   # # Render dynamic PWA files from app/views/pwa/*
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
   root "dashboard#index"
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   delete '/products/:id', to: 'products#destroy'
   patch '/products/:id', to: "products#update"
   post '/products', to: 'products#create'
+  get '/products/search', to: 'products#search'
   get '/products', to: "products#index", as: :productos
   get '/products/new', to: "products#new", as: :new_producto
   get '/products/:id', to: "products#show", as: :producto
@@ -38,9 +39,17 @@ Rails.application.routes.draw do
   
 
   #VENTA
+  delete "/checkout/remove", to: "sales#remove", as: :quitar_item
+  delete "/checkout/cancel", to: "sales#cancel", as: :cancel_sale
+  patch "/checkout/commit", to: "sales#commit", as: :commit_sale
+  post "/checkout/add", to: "sales#add", as: :agregar_item
+  get "/sales/:id", to: "sales#show", as: :venta
   get '/sales', to: "sales#index"
-  get '/checkout', to: "sales#create"
+  get '/checkout', to: "sales#create", as: :checkout
   get '/sales/:id', to: "sales#show", as: :sale
 
+  #PDF
+  get "sales/pdf/:id", to: "pdf#generate", as: :ventaPDF
+  get "/download", to: "pdf#download", as: :downloadPDF
   
 end

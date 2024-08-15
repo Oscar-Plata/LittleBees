@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "venta", target: "_top" do %>
+
+  <% if @sale.present? && @sale.productosventa.any? %>
+    <%= render 'products/items' %>
+    <p>Total: <%= @sale.calcTotal %></p>
+    <%= form_with url: commit_sale_path, method: :patch, local: true do |f| %>
+      <%= f.submit "Vender" %>
+    <% end %>
+    <%= link_to 'Generar PDF', ventaPDF_path(@sale), data: { turbo: false } %>    <%= form_with(url: cancel_sale_path, method: :delete) do |f| %>
+      <%= f.submit "Cancelar" %>
+    <% end %>
+  <% else %>
+    <p>Sin productos</p>
+  <% end %>
+<% end %>
+

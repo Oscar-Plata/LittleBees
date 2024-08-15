@@ -1,1 +1,9 @@
-<h1>Realizar una venta</h1>
+
+<%= turbo_frame_tag "catalogo" do %>
+<h1>CATALOGO</h1>
+<%= render partial: "sales/catalogo", locals: { productos: @catalogo } %>
+<% end %>
+
+<h1>Nueva venta</h1>
+  <%= render partial: 'sales/venta', locals: { sale: @sale } %>
+

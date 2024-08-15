@@ -1,5 +1,8 @@
 class Producto < ApplicationRecord
   before_save :data_trim 
+  
+  has_many :productosventa, class_name: "ProductoVenta"
+  has_many :ventas, through: :productosventa
   has_one_attached :foto
 
   validates :nombre, presence: true, uniqueness: true, format:{

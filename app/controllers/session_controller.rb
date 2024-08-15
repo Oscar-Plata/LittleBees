@@ -15,7 +15,19 @@ class SessionController < ApplicationController
   end
 
   def logout
+    pp "LOGOUT"
+    ##ELIMINAR POSIBLES VENTAS 
+    if session[:venta_id].present?
+      "HAY UNA VENTA EN PROCESO"
+      Current.sale ||= Venta.find_by(id: session[:venta_id])
+      pp Current.sale.productosventa.destroy_all
+      pp Current.sale.destroy
+    else
+      pp "NO HAY VENTA EN PROCESO"
+    end
+    ##CERRAR SESION USUARIO
     session.delete(:usuario_id)
+    session.delete(:venta_id)
     redirect_to login_session_path, notice: "Sesion Cerrada."
   end
 

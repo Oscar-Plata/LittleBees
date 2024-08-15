@@ -58,3 +58,5 @@ group :test do
 
   
 end
+
+gem "prawn", "~> 2.5"
